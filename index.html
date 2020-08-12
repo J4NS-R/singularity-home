@@ -3,31 +3,171 @@
 <head>
     <meta charset="UTF-8">
     <title>Singularity</title>
+    <link rel="icon" href="favicon.ico"/>
     <style>
         body {
             font-family: sans-serif;
+            margin: 0;
+        }
+        #main-screen {
+            min-height: 88vh;
+            color: white;
+            background-color: #000;
+            padding: 6vh;
+        }
+        #main-screen a {
+            color: grey;
+            font-weight: bold;
+        }
+        #below-main {
+            width: 1024px;
+            max-width: 85vw;
+            padding: 6vw;
+        }
+        .big-text {
+            font-size: 2.3em;
+            font-weight: bolder;
         }
     </style>
 </head>
 <body>
-    <div id="main-screen">
-        <p id="title"><span class="big-text">Singularity</span>.net.za</p>
-        <p>Welcome to <a href="https://rauten.co.za">George Rautenbach</a>'s corner of the web.</p>
-    </div>
+<div id="main-screen">
+    <p id="title"><span class="big-text">Singularity</span>.net.za</p>
+    <p>Welcome to <a href="https://rauten.co.za">George Rautenbach</a>'s corner of the web.</p>
+</div>
 
+<div id="below-main">
     <p>Singularity is George's digital service provider arm.
         It hosts backend apps, services, cron scripts, certificate management, game servers, and much more
         for his applications, platforms, and personal use.</p>
 
     <p>Singularity was named after the currently-hypothesised point in time at which
-        the intelligence of machines will surpass that of mankind (
-        <a href="https://en.wikipedia.org/wiki/Technological_singularity">wiki</a>).
+        the intelligence of machines will surpass that of mankind
+        (<a href="https://en.wikipedia.org/wiki/Technological_singularity">wiki</a>).
         Being one of the greatest philosophical
         issues in computer science, George deemed it a very apt name.
         <a href="https://rauten.co.za">Learn more about George</a>. </p>
 
     <p>For security reasons the services aren't listed here. Check George's
         <a href="https://rauten.co.za/projects">projects</a> page for more info.</p>
+
+    <p style="margin-top: 48px;">JavaScript animations powered by <a href="https://www.vantajs.com">Vanta.js</a>.</p>
+</div>
+
+<script src="https://libalex.singularity.net.za/web-depends/three.r119.min.js"></script>
+
+<script>
+    const DEPENDS_URL = 'https://libalex.singularity.net.za/web-depends'
+
+    function loadScript(url, onLoaded){
+        const script = document.createElement('script');
+        script.setAttribute('src', url);
+        document.body.appendChild(script);
+        script.addEventListener('load', onLoaded, false);
+    }
+
+    // pick a random animation
+    switch(Math.floor(Math.random() * 5)){
+        case 0:
+            loadScript(DEPENDS_URL+'/vanta.dots.min.js', ()=>{
+                VANTA.DOTS({
+                    el: "#main-screen",
+                    mouseControls: true,
+                    touchControls: true,
+                    gyroControls: false,  // orientation sensor deprecated
+                    minHeight: 200.00,
+                    minWidth: 200.00,
+                    scale: 1.00,
+                    scaleMobile: 1.00,
+                    color: 0x20f1ff,
+                    color2: 0xff2061,
+                    size: 7.40,
+                    spacing: 32.00
+                });
+            });
+            break;
+        case 1:
+            loadScript(DEPENDS_URL+'/vanta.waves.min.js', ()=>{
+                VANTA.WAVES({
+                    el: "#main-screen",
+                    mouseControls: true,
+                    touchControls: true,
+                    gyroControls: false,
+                    minHeight: 200.00,
+                    minWidth: 200.00,
+                    scale: 1.00,
+                    scaleMobile: 1.00,
+                    color: 0x13f61,
+                    shininess: 120.00,
+                    waveHeight: 29.00,
+                    waveSpeed: 0.75,
+                    zoom: 0.82
+                });
+            });
+            break;
+        case 2:
+            loadScript(DEPENDS_URL+'/vanta.net.min.js', ()=>{
+                VANTA.NET({
+                    el: "#main-screen",
+                    mouseControls: true,
+                    touchControls: true,
+                    gyroControls: false,
+                    minHeight: 200.00,
+                    minWidth: 200.00,
+                    scale: 1.00,
+                    scaleMobile: 1.00,
+                    color: 0x22d456,
+                    backgroundColor: 0x1b093c,
+                    points: 13.00,
+                    maxDistance: 22.00
+                });
+            });
+            break;
+        case 3:
+            loadScript(DEPENDS_URL+'/vanta.rings.min.js', ()=>{
+                VANTA.RINGS({
+                    el: "#main-screen",
+                    mouseControls: true,
+                    touchControls: true,
+                    gyroControls: false,
+                    minHeight: 200.00,
+                    minWidth: 200.00,
+                    scale: 1.00,
+                    scaleMobile: 1.00,
+                    backgroundColor: 0x30502,
+                    color: 0x891b1b
+                });
+            });
+            break;
+        case 4:
+            loadScript(DEPENDS_URL+'/vanta.globe.min.js', ()=>{
+                VANTA.GLOBE({
+                    el: "#main-screen",
+                    mouseControls: true,
+                    touchControls: true,
+                    gyroControls: false,
+                    minHeight: 200.00,
+                    minWidth: 200.00,
+                    scale: 1.00,
+                    scaleMobile: 1.00,
+                    color: 0xa49c17,
+                    color2: 0xffff
+                });
+            });
+            break;
+    }
+
+
+
+
+
+
+
+
+
+
+
+</script>
 
 </body>
 </html>
