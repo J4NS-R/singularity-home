@@ -1,0 +1,11 @@
+version: 2.1  # circleCi engine
+
+jobs:
+  stage:
+    docker:
+      - image: ubuntu:20
+
+    steps:
+      - checkout  # get that code
+      - run: echo "In business!"
+      - run: ls
