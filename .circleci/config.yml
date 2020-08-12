@@ -6,6 +6,25 @@ jobs:
       - image: ubuntu:20
 
     steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "f2:af:63:fe:dd:af:13:66:6a:bd:0e:62:88:cb:42:71"
       - checkout  # get that code
-      - run: echo "In business!"
-      - run: ls
+      - run: scp * ci@$SSH_HOST:./staging/singularity-home/
+
+
+workflows:
+  version: 2
+  stage:
+    jobs:
+      - stage:  # automatically stage the newest commits
+          filters:
+            branches:
+              ignore: master
+  deploy:
+    jobs:
+      - deploy:
+          type: approval  # only deploy if manually allowed
+          filters:
+            branches:
+              only: master
