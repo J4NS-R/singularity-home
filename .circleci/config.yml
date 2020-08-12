@@ -34,8 +34,11 @@ workflows:
               ignore: master
   deploy:
     jobs:
-      - deploy:
-          type: approval  # only deploy if manually allowed
+      - approve_deployment:
+          type: approval
           filters:
             branches:
               only: master
+      - deploy:
+          requires:
+            - approve_deployment  # only deploy if manually allowed
