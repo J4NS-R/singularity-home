@@ -3,22 +3,24 @@ version: 2.1  # circleCi engine
 jobs:
   stage:
     machine:
+      enabled: true  # useful for ssh'ing
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "f2:af:63:fe:dd:af:13:66:6a:bd:0e:62:88:cb:42:71"
+      - checkout  # get that code
+      - run: ssh ci@$SSH_HOST "cd staging/singularity-home && rm -rf *"
+      - run: scp * ci@$SSH_HOST:./staging/singularity-home/
+
+  deploy:
+    machine:
       enabled: true
     steps:
       - add_ssh_keys:
           fingerprints:
             - "f2:af:63:fe:dd:af:13:66:6a:bd:0e:62:88:cb:42:71"
-      - checkout  # get that code
-      - run: scp * ci@$SSH_HOST:./staging/singularity-home/
-
-  deploy:
-    docker:
-      - image: ubuntu:20.04
-    steps:
-      - add_ssh_keys:
-          fingerprints:
-            - "f2:af:63:fe:dd:af:13:66:6a:bd:0e:62:88:cb:42:71"
-      - checkout  # get that code
+      - checkout
+      - run: ssh ci@$SSH_HOST "cd deployment/singularity-home && rm -rf *"
       - run: scp * ci@$SSH_HOST:./deployment/singularity-home/
 
 
