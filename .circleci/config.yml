@@ -2,9 +2,8 @@ version: 2.1  # circleCi engine
 
 jobs:
   stage:
-    docker:
-      - image: ubuntu:20.04
-
+    machine:
+      enabled: true
     steps:
       - add_ssh_keys:
           fingerprints:
@@ -15,7 +14,6 @@ jobs:
   deploy:
     docker:
       - image: ubuntu:20.04
-
     steps:
       - add_ssh_keys:
           fingerprints:
